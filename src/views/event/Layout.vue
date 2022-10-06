@@ -1,12 +1,16 @@
 <template>
   <div v-if="event">
     <h1>{{ event.title }}</h1>
-    <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-    <p>{{ event.description }}</p>
+      <router-link :to="{ name: 'EventDetails' }">Details</router-link>
+      |
+      <router-link :to="{ name: 'EventRegister' }">Register</router-link>
+      |
+      <router-link :to="{ name: 'EventEdit' }">Edit</router-link>
+      <router-view :event="event" />
   </div>
 </template>
 
-<script>
+<script>// @ts-nocheck
 import EventService from '@/services/EventService.js'
 export default {
   props: ['id'],
