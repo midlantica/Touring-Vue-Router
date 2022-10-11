@@ -1,20 +1,19 @@
-// @ts-nocheck
 import { createRouter, createWebHistory } from 'vue-router'
-import EventList from '../views/EventList.vue'
-import EventLayout from '../views/event/Layout.vue'
-import EventDetails from '../views/event/Details.vue'
-import EventRegister from '../views/event/Register.vue'
-import EventEdit from '../views/event/Edit.vue'
-import About from '../views/About.vue'
-import NotFound from '../views/NotFound.vue'
-import NetworkError from '../views/NetworkError.vue'
+import EventList from '@/views/EventList.vue'
+import EventLayout from '@/views/event/Layout.vue'
+import EventDetails from '@/views/event/Details.vue'
+import EventRegister from '@/views/event/Register.vue'
+import EventEdit from '@/views/event/Edit.vue'
+import About from '@/views/About.vue'
+import NotFound from '@/views/NotFound.vue'
+import NetworkError from '@/views/NetworkError.vue'
 
 const routes = [
   {
     path: '/',
     name: 'EventList',
     component: EventList,
-    props: route => ({ page: parseInt(route.query.page) || 1})
+    props: route => ({ page: parseInt(route.query.page) || 1 })
   },
   {
     path: '/events/:id',
@@ -36,18 +35,14 @@ const routes = [
         path: 'edit',
         name: 'EventEdit',
         component: EventEdit
-      },
+      }
     ]
   },
   {
-    path: '/about/:id',
-    redirect: () => {
-      return { name: 'EventDetails'}
-    },
-    children: [
-      { path: 'register', redirect: () => ({ name: 'EventRegister' }) },
-      { path: 'edit', redirect: () => ({ name: 'EventEdit' }) },
-    ]
+    path: '/event/:afterEvent(.*)',
+    redirect: to => {
+      return { path: '/events/' + to.params.afterEvent }
+    }
   },
   {
     path: '/about',
@@ -64,6 +59,11 @@ const routes = [
     name: '404Resource',
     component: NotFound,
     props: true
+  },
+  {
+    path: '/network-error',
+    name: 'NetworkError',
+    component: NetworkError
   }
 ]
 

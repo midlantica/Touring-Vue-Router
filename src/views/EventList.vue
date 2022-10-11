@@ -5,29 +5,29 @@
 
     <div class="pagination">
       <router-link
-        class="page-prev"
-        :to="{name: 'EventList', query: { page: page - 1 } }"
+        id="page-prev"
+        :to="{ name: 'EventList', query: { page: page - 1 } }"
         rel="prev"
-        v-if="page != 1">
-        &#60; Previous Page
-      </router-link>
+        v-if="page != 1"
+        >&#60; Previous</router-link
+      >
+
       <router-link
-        class="page-next"
-        :to="{name: 'EventList', query: { page: page + 1 } }"
+        id="page-next"
+        :to="{ name: 'EventList', query: { page: page + 1 } }"
         rel="next"
         v-if="hasNextPage"
+        >Next &#62;</router-link
       >
-      Next Page &#62;
-      </router-link>
     </div>
   </div>
 </template>
+
 
 <script>
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
 import NProgress from 'nprogress'
-
 export default {
   name: 'EventList',
   props: ['page'],
@@ -46,7 +46,7 @@ export default {
       .then(response => {
         next(comp => {
           comp.events = response.data
-          comp.totalEvents = response.headers['x-total-headers']
+          comp.totalEvents = response.headers['x-total-count']
         })
       })
       .catch(() => {
@@ -71,7 +71,7 @@ export default {
       })
   },
   computed: {
-    hasNextPage () {
+    hasNextPage() {
       var totalPages = Math.ceil(this.totalEvents / 2)
       return this.page < totalPages
     }
