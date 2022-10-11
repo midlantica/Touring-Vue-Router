@@ -13,7 +13,7 @@ export default {
   getEvents(perPage, page) {
     return apiClient
       .get('/events?_limit=' + perPage + '&_page=' + page)
-      .then(sleeper(1000))
+      .then(sleeper(500))
   },
   getEvent(id) {
     return apiClient.get('/events/' + id)
