@@ -5,7 +5,7 @@
 
     <div class="pagination">
       <router-link
-        id="page-prev"
+        class="page-prev"
         :to="{ name: 'EventList', query: { page: page - 1 } }"
         rel="prev"
         v-if="page != 1"
@@ -13,7 +13,7 @@
       >
 
       <router-link
-        id="page-next"
+        class="page-next"
         :to="{ name: 'EventList', query: { page: page + 1 } }"
         rel="next"
         v-if="hasNextPage"
