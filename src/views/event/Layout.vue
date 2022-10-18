@@ -1,12 +1,12 @@
 <template>
   <div v-if="event">
     <h1>{{ event.title }}</h1>
+      <router-view :event="event" />
       <router-link :to="{ name: 'EventDetails' }">Details</router-link>
       |
       <router-link :to="{ name: 'EventRegister' }">Register</router-link>
       |
       <router-link :to="{ name: 'EventEdit' }">Edit</router-link>
-      <router-view :event="event" />
   </div>
 </template>
 
